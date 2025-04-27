@@ -1,9 +1,26 @@
+/* App.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Przyjemniejsza czcionka systemowa */
+  margin: 0; /* Usuń domyślne marginesy body */
+  background-color: #f4f4f4; /* Jasnoszare tło strony */
+  color: #333; /* Ciemniejszy kolor tekstu dla lepszej czytelności */
+  line-height: 1.6; /* Lepsze odstępy między wierszami */
+}
+
 .App {
   text-align: center;
+  padding: 20px; /* Dodaj trochę wewnętrznego paddingu dla całej aplikacji */
+  max-width: 960px; /* Ogranicz szerokość, aby treść nie rozciągała się na całą stronę */
+  margin: 20px auto; /* Wyśrodkuj aplikację i dodaj marginesy */
+  background-color: #fff; /* Białe tło kontenera aplikacji */
+  border-radius: 8px; /* Zaokrąglone rogi kontenera aplikacji */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtelny cień */
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 80px; /* Ustaw stałą, mniejszą wysokość logo */
+  margin-bottom: 20px;
   pointer-events: none;
 }
 
@@ -14,18 +31,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* Usunięto style, które nie są bezpośrednio używane, a body zajmuje się tłem */
+  padding: 20px 0; /* Dodaj trochę paddingu wokół potencjalnej zawartości headera */
+  margin-bottom: 20px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #007bff; /* Bardziej standardowy kolor linków */
+  text-decoration: none; /* Usuń domyślne podkreślenie */
+}
+
+.App-link:hover {
+  text-decoration: underline; /* Podkreślaj linki przy najechaniu */
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +52,128 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Style dla rozwijanych sekcji */
+
+.expandable-section {
+  border: 1px solid #ddd; /* Lżejszy kolor obramowania */
+  border-radius: 8px; /* Większe zaokrąglenie rogów */
+  margin-bottom: 15px; /* Większy margines dolny między sekcjami */
+  overflow: hidden;
+  background-color: #fff; /* Białe tło sekcji */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtelniejszy cień sekcji */
+}
+
+.section-header {
+  background-color: #e9ecef; /* Jaśniejszy kolor tła nagłówka */
+  padding: 12px 15px; /* Większy padding nagłówka */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd; /* Dodaj linię oddzielającą nagłówek od treści */
+}
+
+.section-header-title {
+  font-size: 1.1em; /* Nieco mniejszy, ale nadal wyraźny tytuł segmentu */
+  margin: 0;
+  color: #495057; /* Ciemniejszy kolor tekstu tytułu */
+}
+
+.section-header-icon {
+  font-size: 1.1em;
+  color: #495057;
+}
+
+.section-content {
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #f8f9fa; /* Subtelna linia na górze treści */
+}
+
+.main-title {
+  background-color: #28a745; /* Bardziej nasycony zielony */
+  color: #fff;
+  font-size: 2.8em; /* Nieco większy tytuł */
+  text-align: center;
+  padding: 20px; /* Większy padding tytułu */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Użyj tej samej, przyjemnej czcionki */
+  border-radius: 8px; /* Większe zaokrąglenie rogów tytułu */
+  margin-bottom: 30px; /* Większy margines dolny tytułu */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtelny cień tekstu tytułu */
+}
+
+/* Style dla formularzy */
+form div {
+  margin-bottom: 10px;
+  text-align: left; /* Wyrównaj etykiety do lewej */
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+form input[type="text"],
+form input[type="checkbox"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Pola tekstowe na całą szerokość kontenera */
+  box-sizing: border-box; /* Uwzględnij padding i border w szerokości */
+}
+
+form input[type="checkbox"] {
+  width: auto; /* Checkbox ma naturalną szerokość */
+  margin-right: 5px;
+}
+
+form button[type="submit"] {
+  background-color: #007bff; /* Standardowy niebieski przycisku */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease; /* Płynne przejście hover */
+}
+
+form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Style dla wiadomości */
+.section-content p[style*="color: green"] {
+  background-color: #e6ffe6;
+  color: #28a745 !important;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #c3e6cb;
+}
+
+.section-content p[style*="color: red"] {
+  background-color: #ffe6e6;
+  color: #dc3545 !important;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+/* Style dla listy czujników */
+.section-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.section-content ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.section-content ul li:last-child {
+  border-bottom: none;
 }

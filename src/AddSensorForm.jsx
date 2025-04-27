@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import './App.css'; // Zaimportuj plik CSS
 
-function AddSensorForm() {
+const AddSensorForm = () => {
   const [name, setName] = useState('');
   const [ipAddress, setIpAddress] = useState('');
   const [active, setActive] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const newSensor = { name, ipAddress, active };
 
     try {
-      const response = await fetch('/api/sensor', { // Zmienione na ścieżkę względną        
-      method: 'POST',
+      const response = await fetch('/api/sensor', { // Zmienione na ścieżkę względną
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -24,7 +26,6 @@ function AddSensorForm() {
         console.log('Czujnik dodany pomyślnie!');
         setSuccessMessage('Czujnik dodany pomyślnie!');
         setErrorMessage('');
-        // Możesz zresetować formularz
         setName('');
         setIpAddress('');
         setActive(false);
@@ -43,45 +44,56 @@ function AddSensorForm() {
     }
   };
 
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
-    <div>
-      <h3>Dodaj Nowy Czujnik</h3>
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nazwa:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+    <div className="expandable-section">
+      <div className="section-header" onClick={toggleExpand}>
+        <h3 className="section-header-title">Dodaj Nowy Czujnik</h3>
+        <span className="section-header-icon">{isExpanded ? '-' : '+'}</span>
+      </div>
+      {isExpanded && (
+        <div className="section-content">
+          {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Nazwa:</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="ipAddress">Adres IP:</label>
+              <input
+                type="text"
+                id="ipAddress"
+                value={ipAddress}
+                onChange={(e) => setIpAddress(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="active">Aktywny:</label>
+              <input
+                type="checkbox"
+                id="active"
+                checked={active}
+                onChange={(e) => setActive(e.target.checked)}
+              />
+            </div>
+            <button type="submit">Dodaj Czujnik</button>
+          </form>
         </div>
-        <div>
-          <label htmlFor="ipAddress">Adres IP:</label>
-          <input
-            type="text"
-            id="ipAddress"
-            value={ipAddress}
-            onChange={(e) => setIpAddress(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="active">Aktywny:</label>
-          <input
-            type="checkbox"
-            id="active"
-            checked={active}
-            onChange={(e) => setActive(e.target.checked)}
-          />
-        </div>
-        <button type="submit">Dodaj Czujnik</button>
-      </form>
+      )}
     </div>
   );
-}
+};
 
 export default AddSensorForm;

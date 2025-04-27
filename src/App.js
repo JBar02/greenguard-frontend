@@ -2,15 +2,14 @@
 import React from 'react';
 import SensorList from './SensorList';
 import AddSensorForm from './AddSensorForm';
-import WeatherDisplay from './WeatherDisplay'; // <--- Importuj nowy komponent
+import WeatherDisplay from './WeatherDisplay';
+import './App.css'; // Zaimportuj plik CSS
 
 function App() {
   return (
-    <div>
-      <h1>Aplikacja GreenGuard</h1>
-
-      <WeatherDisplay /> {/* <--- Dodaj komponent wyświetlający pogodę */}
-
+    <div className="App">
+      <h1 className="main-title">Aplikacja GreenGuard</h1>
+      <WeatherDisplay />
       <SensorList />
       <AddSensorForm />
     </div>
