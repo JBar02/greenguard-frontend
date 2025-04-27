@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# GreenGuard Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikacja frontendowa (interfejs użytkownika) dla projektu systemu monitorowania roślin GreenGuard.
 
-## Available Scripts
+## Opis Projektu
 
-In the project directory, you can run:
+Ten moduł stanowi warstwę prezentacji systemu GreenGuard. Jego głównym celem jest zapewnienie intuicyjnego interfejsu użytkownika do interakcji z backendem GreenGuard. Aplikacja umożliwia:
 
-### `npm start`
+* Przeglądanie listy istniejących sensorów zarejestrowanych w systemie.
+* Dodawanie nowych sensorów poprzez formularz.
+* Wyświetlanie dodatkowych informacji (np. aktualnych danych pogodowych pobieranych z zewnętrznego API).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Frontend komunikuje się z backendem poprzez REST API w celu zarządzania danymi sensorów.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backend
 
-### `npm test`
+Aplikacja frontendowa współpracuje z backendem GreenGuard. Kod źródłowy backendu znajduje się w osobnym repozytorium:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[https://github.com/Ciamcioo/GreenGuard](https://github.com/Ciamcioo/GreenGuard)
 
-### `npm run build`
+**Ważne:** Przed uruchomieniem frontendu, upewnij się, że backend GreenGuard jest uruchomiony i dostępny (domyślnie oczekiwany na porcie `9090`). Instrukcje dotyczące uruchomienia backendu znajdziesz w pliku `README.md` w repozytorium backendu.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Jak uruchomić lokalnie
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Aby uruchomić aplikację frontendową GreenGuard na swoim komputerze w środowisku dewelopmentu, wykonaj poniższe kroki:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Wymagania wstępne:**
 
-### `npm run eject`
+* Zainstalowany Node.js i menedżer pakietów npm (który jest instalowany razem z Node.js) lub Yarn.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Kroki uruchomienia:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1.  **Sklonuj lub pobierz kod frontendu:**
+    Jeżeli jeszcze tego nie zrobiłeś, upewnij się, że masz kod projektu frontendowego na swoim komputerze.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2.  **Przejdź do katalogu projektu w terminalu:**
+    Otwórz terminal lub wiersz poleceń i przejdź do głównego katalogu projektu frontendowego GreenGuard (tam, gdzie znajduje się plik `package.json`).
+    ```bash
+    cd /ścieżka/do/katalogu/GreenGuard-frontend
+    ```
+    (Zastąp `/ścieżka/do/katalogu/GreenGuard-frontend` rzeczywistą ścieżką do Twojego katalogu projektu frontendowego).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3.  **Zainstaluj zależności:**
+    Zainstaluj wszystkie biblioteki i zależności wymagane przez projekt, korzystając z npm lub Yarn:
+    ```bash
+    npm install
+    # lub jeśli używasz Yarn:
+    # yarn install
+    ```
 
-## Learn More
+4.  **Skonfiguruj Proxy (dla dewelopmentu):**
+    Upewnij się, że w pliku `package.json` w głównym katalogu projektu frontendowego masz dodaną konfigurację proxy, która przekierowuje wywołania API do Twojego lokalnego backendu. Jest to kluczowe dla poprawnej komunikacji podczas dewelopmentu i ominięcia problemów z CORS. Sprawdź, czy w pliku `package.json` znajduje się linia:
+    ```json
+      "proxy": "http://localhost:9090",
+    ```
+    (Upewnij się, że jest umieszczona w głównym obiekcie JSON, np. po linii `"private": true,`).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5.  **Uruchom Backend:**
+    Upewnij się, że Twój backend GreenGuard jest uruchomiony. Frontend potrzebuje działającego backendu, aby pobierać i wysyłać dane dotyczące sensorów. Postępuj zgodnie z instrukcjami uruchomienia podanymi w `README.md` repozytorium backendu ([link do README backendu](#backend)).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6.  **Uruchom Frontend:**
+    W terminalu, będąc nadal w głównym katalogu projektu frontendowego, uruchom serwer dewelopmentowy Reacta:
+    ```bash
+    npm start
+    # lub jeśli używasz Yarn:
+    # yarn start
+    ```
 
-### Code Splitting
+7.  **Otwórz aplikację w przeglądarce:**
+    Serwer dewelopmentowy zostanie uruchomiony (domyślnie na porcie `3000`), a aplikacja powinna automatycznie otworzyć się w Twojej domyślnej przeglądarce pod adresem:
+    [http://localhost:3000](http://localhost:3000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Teraz aplikacja frontendowa GreenGuard powinna być w pełni funkcjonalna i komunikować się z uruchomionym backendem.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Wskazówki dodatkowe:**
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Możesz modyfikować ten plik `README.md`, dodając sekcje o funkcjach, strukturze projektu, technologiach itp.
+* Pamiętaj, że konfiguracja `proxy` w `package.json` działa tylko dla środowiska dewelopmentu (`npm start`). Wdrożenie na produkcję będzie wymagało zastosowania innej metody (np. odwrotnego proxy jak Nginx lub Apache).
+* Jeżeli zaimplementowałeś pobieranie pogody bezpośrednio z frontendu, ta część działa niezależnie od backendu (ale wymaga klucza API OpenWeatherMap).
