@@ -7,6 +7,8 @@ import Login from './Login';
 import Signup from './Signup';
 import './App.css'; 
 
+import FavoriteCities from './components/FavoriteCities';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -46,6 +48,7 @@ function App() {
           <WeatherDisplay />
           <SensorList />
           <AddSensorForm />
+          <FavoriteCities />
         </>
       ) : (
         <div className="auth-section"> 
@@ -73,3 +76,4 @@ function App() {
 }
 
 export default App;
+
