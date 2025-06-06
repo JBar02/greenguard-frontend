@@ -1,5 +1,6 @@
+// src/AddSensorForm.jsx
 import React, { useState } from 'react';
-import './App.css'; // Zaimportuj plik CSS
+import './App.css'; 
 
 const AddSensorForm = () => {
   const [name, setName] = useState('');
@@ -11,13 +12,29 @@ const AddSensorForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newSensor = { name, ipAddress, active };
+    setSuccessMessage('');
+    setErrorMessage('');
 
     try {
-      const response = await fetch('/api/sensor', { // Zmienione na ścieżkę względną
+      const token = localStorage.getItem('authToken');
+      const username = localStorage.getItem('loggedInUsername'); 
+
+      if (!token) {
+        setErrorMessage('Brak tokena autoryzacji. Zaloguj się, aby dodać czujnik.');
+        return;
+      }
+      if (!username) { 
+        setErrorMessage('Nazwa użytkownika nie jest dostępna. Spróbuj zalogować się ponownie.');
+        return;
+      }
+
+      const newSensor = { name, ipAddress, active, username }; 
+
+      const response = await fetch('/api/sensor', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
         },
         body: JSON.stringify(newSensor),
       });
@@ -29,12 +46,10 @@ const AddSensorForm = () => {
         setName('');
         setIpAddress('');
         setActive(false);
-        // Możesz również odświeżyć listę czujników po dodaniu
-        // (np. wywołując funkcję z komponentu nadrzędnego)
       } else {
         const errorData = await response.text();
         console.error('Błąd podczas dodawania czujnika:', response.status, errorData);
-        setErrorMessage(`Błąd podczas dodawania czujnika: ${response.status} - ${errorData}`);
+        setErrorMessage(`Błąd podczas dodawania czujnika: ${response.status} - ${errorData}. Upewnij się, że jesteś zalogowany.`);
         setSuccessMessage('');
       }
     } catch (error) {
@@ -49,13 +64,13 @@ const AddSensorForm = () => {
   };
 
   return (
-    <div className="expandable-section">
-      <div className="section-header" onClick={toggleExpand}>
-        <h3 className="section-header-title">Dodaj Nowy Czujnik</h3>
-        <span className="section-header-icon">{isExpanded ? '-' : '+'}</span>
+    <div className="expandable-section"> {/* Używa klasy .expandable-section */}
+      <div className="section-header" onClick={toggleExpand}> {/* Używa klasy .section-header */}
+        <h3 className="section-header-title">Dodaj Nowy Czujnik</h3> {/* Używa klasy .section-header-title */}
+        <span className="section-header-icon">{isExpanded ? '-' : '+'}</span> {/* Używa klasy .section-header-icon */}
       </div>
       {isExpanded && (
-        <div className="section-content">
+        <div className="section-content"> {/* Używa klasy .section-content */}
           {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           <form onSubmit={handleSubmit}>

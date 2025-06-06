@@ -1,23 +1,42 @@
+// src/SensorList.jsx
 import React, { useState, useEffect } from 'react';
-import './App.css'; 
-
+import './App.css';
 
 function SensorList() {
   const [sensors, setSensors] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Ustaw na true, bo będziemy ładować dane
   const [error, setError] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); 
+      setError(null);   
+
       try {
-        const response = await fetch('/api/sensors');
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+          setError(new Error('Brak tokena autoryzacji. Zaloguj się, aby zobaczyć listę czujników.'));
+          setLoading(false);
+          return; 
+        }
+
+        // Endpoint /api/sensors jest teraz dostępny w backendzie!
+        const response = await fetch('/api/sensors', { 
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+          },
+        });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          const errorData = await response.text();
+          throw new Error(`Błąd HTTP! status: ${response.status}, message: ${errorData}`);
         }
         const data = await response.json();
-        setSensors(data);
+        setSensors(data); // Zapisz pobrane czujniki do stanu
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -41,14 +60,19 @@ function SensorList() {
       {isExpanded && (
         <div className="section-content">
           {loading && <div>Ładowanie czujników...</div>}
-          {error && <div>Wystąpił błąd: {error.message}</div>}
+          {error && <div style={{ color: 'red' }}>Wystąpił błąd: {error.message}</div>}
           {!loading && !error && (
+            // Wyświetl listę czujników, jeśli nie ma błędów i dane są załadowane
             <ul>
-              {sensors.map(sensor => (
-                <li key={sensor.name}>
-                  Nazwa: {sensor.name}, IP Adres: {sensor.ipAddress}, Aktywny: {sensor.active ? 'Tak' : 'Nie'}
-                </li>
-              ))}
+              {sensors.length > 0 ? (
+                sensors.map(sensor => (
+                  <li key={sensor.name}> {/* Załóżmy, że 'name' jest unikalne dla klucza */}
+                    **Nazwa**: {sensor.name}, **Adres IP**: {sensor.ipAddress}, **Aktywny**: {sensor.active ? 'Tak' : 'Nie'}
+                  </li>
+                ))
+              ) : (
+                <p>Brak czujników do wyświetlenia.</p>
+              )}
             </ul>
           )}
         </div>
