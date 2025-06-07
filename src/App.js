@@ -1,7 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import SensorList from './SensorList';
-import AddSensorForm from './AddSensorForm';
 import WeatherDisplay from './WeatherDisplay';
 import Login from './Login';
 import Signup from './Signup';
@@ -47,7 +46,6 @@ function App() {
           </div>
           <WeatherDisplay />
           <SensorList />
-          <AddSensorForm />
           <FavoriteCities />
         </>
       ) : (
