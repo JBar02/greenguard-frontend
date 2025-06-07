@@ -1,11 +1,12 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import SensorList from './SensorList';
-import AddSensorForm from './AddSensorForm';
 import WeatherDisplay from './WeatherDisplay';
 import Login from './Login';
 import Signup from './Signup';
 import './App.css'; 
+
+import FavoriteCities from './components/FavoriteCities';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,7 +46,7 @@ function App() {
           </div>
           <WeatherDisplay />
           <SensorList />
-          <AddSensorForm />
+          <FavoriteCities />
         </>
       ) : (
         <div className="auth-section"> 
@@ -73,3 +74,4 @@ function App() {
 }
 
 export default App;
+

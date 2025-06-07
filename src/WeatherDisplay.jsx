@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'; // Zaimportuj plik CSS
 
+// Twój klucz API z OpenWeatherMap
+const API_KEY = '05455dfa38b456f8b26c55a43dd4bfd8'; // <--- Użyj swojego klucza!
+
 function WeatherDisplay() {
-  // Twój klucz API z OpenWeatherMap
-  const API_KEY = '05455dfa38b456f8b26c55a43dd4bfd8'; // <--- Użyj swojego klucza!
   // Miasto, dla którego chcesz wyświetlić pogodę (możesz zmienić)
   const CITY_NAME = 'Wroclaw'; // Przykładowo Wrocław
 
@@ -40,7 +41,7 @@ function WeatherDisplay() {
     };
 
     fetchWeather();
-  }, [CITY_NAME, API_KEY]);
+  }, [CITY_NAME]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -73,6 +74,24 @@ function WeatherDisplay() {
       )}
     </div>
   );
+}
+
+export async function fetchWeatherData(city) {
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=pl`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Błąd HTTP! Status: ${response.status}, Wiadomość: ${errorText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(`Błąd pobierania danych pogodowych dla miasta ${city}:`, err);
+    return null;
+  }
 }
 
 export default WeatherDisplay;
