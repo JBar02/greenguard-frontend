@@ -199,3 +199,62 @@
 .section-content button[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.expandable-section {
+  max-width: 800px;       /* szerokość tabeli */
+  margin: 20px auto;      /* auto margin poziomo wyśrodkuje, 20px margines pionowo */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.expandable-section table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center; /* wyśrodkowanie tekstu w komórkach */
+}
+
+.expandable-section th, 
+.expandable-section td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.expandable-section th {
+  background-color: #e0e0e0;
+}
+
+.section-header {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section-header-title {
+  font-size: 1.5rem;
+}
+
+.section-header-icon {
+  font-size: 1.5rem;
+}
+
+.sensor-page {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.form-section {
+  flex: 1;
+  max-width: 300px;
+}
+
+.list-section {
+  flex: 2;
+}
+
