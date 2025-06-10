@@ -111,7 +111,7 @@ function SensorList() {
                     sensors.map((sensor) => (
                       <tr key={sensor.name}>
                         <td>
-                          <button onClick={() => deleteSensor(sensor.name)}>
+                          <button onClick={() => deleteSensor(sensor.ipAddress)}>
                             🗑️ Usuń
                           </button>
                         </td>
