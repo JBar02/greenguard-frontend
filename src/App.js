@@ -4,9 +4,11 @@ import SensorList from './SensorList';
 import WeatherDisplay from './WeatherDisplay';
 import Login from './Login';
 import Signup from './Signup';
-import './App.css'; 
+import './App.css';
 
 import FavoriteCities from './components/FavoriteCities';
+// Zmień import na nowy komponent
+import AllActiveSensorReadings from './AllActiveSensorReadings'; // <--- ZAKTUALIZOWANY IMPORT
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +27,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('loggedInUsername'); 
+    localStorage.removeItem('loggedInUsername');
     setIsLoggedIn(false);
     setShowRegister(false);
   };
@@ -40,16 +42,17 @@ function App() {
 
       {isLoggedIn ? (
         <>
-          {/* Nowy kontener dla przycisku wylogowania */}
           <div className="logout-button-container">
             <button className="logout-button" onClick={handleLogout}>Wyloguj</button>
           </div>
           <WeatherDisplay />
           <SensorList />
           <FavoriteCities />
+          {/* Użyj nowego komponentu */}
+          <AllActiveSensorReadings /> {/* <--- ZAKTUALIZOWANY KOMPONENT */}
         </>
       ) : (
-        <div className="auth-section"> 
+        <div className="auth-section">
           {showRegister ? (
             <>
               <Signup onSignupSuccess={() => setShowRegister(false)} />
@@ -74,4 +77,3 @@ function App() {
 }
 
 export default App;
-
