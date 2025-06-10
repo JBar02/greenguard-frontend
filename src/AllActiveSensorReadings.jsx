@@ -131,8 +131,8 @@ const AllActiveSensorReadings = () => {
   useEffect(() => {
     fetchSensorAndReadingData(); // Pobierz dane przy pierwszym renderowaniu
 
-    // Ustaw interwał odświeżania co 15 sekund
-    const intervalId = setInterval(fetchSensorAndReadingData, 15000);
+    // Ustaw interwał odświeżania co 5 sekund
+    const intervalId = setInterval(fetchSensorAndReadingData, 5000);
 
     // Funkcja czyszcząca interwał po odmontowaniu komponentu
     return () => clearInterval(intervalId);
