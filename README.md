@@ -79,7 +79,5 @@ Ten moduł stanowi warstwę prezentacji systemu GreenGuard. Jego głównym celem
 * Przeglądanie listy istniejących sensorów zarejestrowanych w systemie.
 * Dodawanie nowych sensorów poprzez formularz.
 * Wyświetlanie dodatkowych informacji (np. aktualnych danych pogodowych pobieranych z zewnętrznego API).
-* Tworzenie i edycję treści do wyświetlenia na e-papierze:
-    * Wprowadzanie i formatowanie tekstu.
-    * Rysowanie i modyfikowanie grafiki.
-
+* Logowanie
+* Tworzenie nowych kont
