@@ -72,10 +72,14 @@ Aby uruchomić aplikację frontendową GreenGuard na swoim komputerze w środowi
 
 Teraz aplikacja frontendowa GreenGuard powinna być w pełni funkcjonalna i komunikować się z uruchomionym backendem.
 
----
 
-**Wskazówki dodatkowe:**
 
-* Możesz modyfikować ten plik `README.md`, dodając sekcje o funkcjach, strukturze projektu, technologiach itp.
-* Pamiętaj, że konfiguracja `proxy` w `package.json` działa tylko dla środowiska dewelopmentu (`npm start`). Wdrożenie na produkcję będzie wymagało zastosowania innej metody (np. odwrotnego proxy jak Nginx lub Apache).
-* Jeżeli zaimplementowałeś pobieranie pogody bezpośrednio z frontendu, ta część działa niezależnie od backendu (ale wymaga klucza API OpenWeatherMap).
+Ten moduł stanowi warstwę prezentacji systemu GreenGuard. Jego głównym celem jest zapewnienie intuicyjnego interfejsu użytkownika do interakcji z backendem GreenGuard. Aplikacja umożliwia:
+
+* Przeglądanie listy istniejących sensorów zarejestrowanych w systemie.
+* Dodawanie nowych sensorów poprzez formularz.
+* Wyświetlanie dodatkowych informacji (np. aktualnych danych pogodowych pobieranych z zewnętrznego API).
+* Tworzenie i edycję treści do wyświetlenia na e-papierze:
+    * Wprowadzanie i formatowanie tekstu.
+    * Rysowanie i modyfikowanie grafiki.
+
